@@ -34,7 +34,7 @@ if os.environ.get('REDIS_URL'):
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://saleor:saleor@localhost:5432/saleor',
+        default='postgres://saleor:saleor@127.0.0.1:5432/saleor',
         conn_max_age=600)}
 
 
