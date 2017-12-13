@@ -11,6 +11,9 @@ import django_cache_url
 
 DEBUG = ast.literal_eval(os.environ.get('DEBUG', 'True'))
 
+DEBUG = 1
+SILKY_PYTHON_PROFILER = True
+
 SITE_ID = 1
 
 PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
@@ -123,6 +126,7 @@ TEMPLATES = [{
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 MIDDLEWARE_CLASSES = [
+    'silk.middleware.SilkyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -181,6 +185,8 @@ INSTALLED_APPS = [
     'django_countries',
     'django_filters',
     'django_celery_results',
+
+    'silk',
 ]
 
 LOGGING = {
