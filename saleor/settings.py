@@ -11,8 +11,24 @@ import django_cache_url
 
 DEBUG = ast.literal_eval(os.environ.get('DEBUG', 'True'))
 
-DEBUG = 1
-SILKY_PYTHON_PROFILER = True
+DEBUG = True
+#DEBUG = False
+
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+    'debug_toolbar.panels.profiling.ProfilingPanel',
+]
 
 SITE_ID = 1
 
@@ -27,6 +43,7 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 INTERNAL_IPS = os.environ.get('INTERNAL_IPS', '127.0.0.1').split()
+
 
 CACHES = {'default': django_cache_url.config()}
 
@@ -120,15 +137,16 @@ TEMPLATES = [{
         'debug': DEBUG,
         'context_processors': context_processors,
         'loaders': loaders,
+        #'loaders': [('django.template.loaders.cached.Loader', loaders)],
         'string_if_invalid': '<< MISSING VARIABLE "%s" >>' if DEBUG else ''}}]
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 MIDDLEWARE_CLASSES = [
-    'silk.middleware.SilkyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -186,7 +204,7 @@ INSTALLED_APPS = [
     'django_filters',
     'django_celery_results',
 
-    'silk',
+    'debug_toolbar',
 ]
 
 LOGGING = {
