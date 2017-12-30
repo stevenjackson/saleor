@@ -23,6 +23,7 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.sql.SQLPanel',
     'debug_toolbar.panels.staticfiles.StaticFilesPanel',
     'debug_toolbar.panels.templates.TemplatesPanel',
+    'template_profiler_panel.panels.template.TemplateProfilerPanel',
     'debug_toolbar.panels.cache.CachePanel',
     'debug_toolbar.panels.signals.SignalsPanel',
     'debug_toolbar.panels.logging.LoggingPanel',
@@ -136,17 +137,18 @@ TEMPLATES = [{
     'OPTIONS': {
         'debug': DEBUG,
         'context_processors': context_processors,
-        'loaders': loaders,
-        #'loaders': [('django.template.loaders.cached.Loader', loaders)],
+        #'loaders': loaders,
+        'loaders': [('django.template.loaders.cached.Loader', loaders)],
         'string_if_invalid': '<< MISSING VARIABLE "%s" >>' if DEBUG else ''}}]
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 MIDDLEWARE_CLASSES = [
+#    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -157,7 +159,12 @@ MIDDLEWARE_CLASSES = [
     'saleor.core.middleware.CountryMiddleware',
     'saleor.core.middleware.CurrencyMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 60
+
 
 INSTALLED_APPS = [
     # External apps that need to go before django's
@@ -205,6 +212,7 @@ INSTALLED_APPS = [
     'django_celery_results',
 
     'debug_toolbar',
+    'template_profiler_panel',
 ]
 
 LOGGING = {
