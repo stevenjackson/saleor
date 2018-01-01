@@ -40,3 +40,4 @@ text-unidecode
 uwsgi>=2.0.0
 celery[redis]
 django-debug-toolbar>=1.9.1
+django-debug-toolbar-template-profiler
