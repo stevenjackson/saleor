@@ -145,8 +145,8 @@ TEMPLATES = [{
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 MIDDLEWARE_CLASSES = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -159,11 +159,11 @@ MIDDLEWARE_CLASSES = [
     'saleor.core.middleware.CountryMiddleware',
     'saleor.core.middleware.CurrencyMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    #'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
-CACHE_MIDDLEWARE_ALIAS = 'default'
-CACHE_MIDDLEWARE_SECONDS = 60
+#CACHE_MIDDLEWARE_ALIAS = 'default'
+#CACHE_MIDDLEWARE_SECONDS = 60
 
 
 INSTALLED_APPS = [
