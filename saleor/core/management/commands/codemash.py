@@ -20,13 +20,13 @@ CODEMASH_SCHEMA = {
     'Hoodie': {
         'category': 'Apparel',
         'product_attributes': {
-            'Color': ['Blue', 'Orange'],
+            'Color': ['Orange'],
             'Brand': ['CodeMash']
         },
         'variant_attributes': {
             'Size': ['XS', 'S', 'M', 'L', 'XL', 'XXL']
         },
-        'images_dir': 't-shirts/',
+        'images_dir': 'hoodies/',
         'is_shipping_required': True
     }
 }
