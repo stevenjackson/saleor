@@ -1,10 +1,11 @@
 from django.conf.urls import url
+from django.views.decorators.cache import cache_page
 
 from . import views
 
 
 urlpatterns = [
-    url(r'^$', views.index_view, name='index'),
+    url(r'^$', cache_page(15)(views.index_view), name='index'),
     url(r'^shipping-address/', views.shipping_address_view,
         name='shipping-address'),
     url(r'^shipping-method/', views.shipping_method_view,
